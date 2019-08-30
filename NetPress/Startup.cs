@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using NetPress.Models;
 
 namespace NetPress
 {
@@ -33,6 +35,9 @@ namespace NetPress
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<UserAccountsContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("UserAccountsContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
