@@ -33,8 +33,11 @@ namespace NetPress
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddMvc();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+               
 
             services.AddDbContext<UserAccountsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("UserAccountsContext")));
@@ -57,6 +60,7 @@ namespace NetPress
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
