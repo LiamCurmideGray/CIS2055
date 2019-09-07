@@ -34,3 +34,4 @@ C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\V
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Edit.g.cshtml.cs
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Index.g.cshtml.cs
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Login.g.cshtml.cs
+C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LoginPartial.g.cshtml.cs
