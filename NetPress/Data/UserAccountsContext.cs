@@ -14,5 +14,7 @@ namespace NetPress.Models
         }
 
         public DbSet<NetPress.Models.UserAccounts> UserAccounts { get; set; }
+        
+        public DbSet<Roles> Roles { get; set; }
     }
 }

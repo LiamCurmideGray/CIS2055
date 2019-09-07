@@ -7,42 +7,68 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NetPress.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace NetPress.Controllers
 {
+   
     public class UserAccountsController : Controller
     {
         private readonly UserAccountsContext userAccountContext;
-
+       
+       
         public UserAccountsController(UserAccountsContext context)
         {
             userAccountContext = context;
+
+            
         }
 
         // GET: UserAccounts
         public async Task<IActionResult> Index()
         {
-            ViewData["SessionData"] = HttpContext.Session.GetString("NetPressUsername");
-            return View(await userAccountContext.UserAccounts.ToListAsync());
+            string sessionRole = HttpContext.Session.GetString("NetPressRole");
+
+            if (UserAdmin(sessionRole))
+            {
+                    ViewData["SessionData"] = HttpContext.Session.GetString("NetPressUsername");
+                    return View(await userAccountContext.UserAccounts.ToListAsync());
+                               
+            }
+                return RedirectToAction("Index", "Home");
+           
         }
 
+        
         // GET: UserAccounts/Details/5
+        
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            string sessionRole = HttpContext.Session.GetString("NetPressRole");
 
-            var userAccounts = await userAccountContext.UserAccounts
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (userAccounts == null)
+            if (ValidUser(sessionRole))
             {
-                return NotFound();
-            }
+                    if (id == null)
+                    {
+                        return NotFound();
+                    }
 
-            TempData["SessionData"] = HttpContext.Session.GetString("NetPressUsername");
-            return View(userAccounts);
+                    var userAccounts = await userAccountContext.UserAccounts
+                        .FirstOrDefaultAsync(m => m.Id == id);
+                    if (userAccounts == null)
+                    {
+                        return NotFound();
+                    }
+
+                    TempData["SessionData"] = HttpContext.Session.GetString("NetPressRole");
+                    return View(userAccounts);
+                
+
+            }
+            return RedirectToAction("Index", "Home");
+
+           
         }
 
         // GET: UserAccounts/Create
@@ -65,9 +91,20 @@ namespace NetPress.Controllers
 
                     if (userAccounts.UserPassword.Equals(ConfirmPassword))
                     {
+                      
                         userAccountContext.Add(userAccounts);
                         await userAccountContext.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
+
+                        var role = await userAccountContext.Roles
+                         .FirstOrDefaultAsync(thisRole => thisRole.Id == 2);
+
+                        userAccounts.Role = role;
+                        userAccounts.RolesType = "Publisher";
+
+                        userAccountContext.Update(userAccounts);
+                        await userAccountContext.SaveChangesAsync();
+
+                        return RedirectToAction("Details", new {userAccounts.Id });
                     } else
                     {
                         ViewData["PasswordMismatch"] = "Password does not match";
@@ -93,17 +130,24 @@ namespace NetPress.Controllers
         // GET: UserAccounts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            string sessionRole = HttpContext.Session.GetString("NetPressRole");
+            if (ValidUser(sessionRole))
             {
-                return NotFound();
-            }
 
-            var userAccounts = await userAccountContext.UserAccounts.FindAsync(id);
-            if (userAccounts == null)
-            {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var userAccounts = await userAccountContext.UserAccounts.FindAsync(id);
+                if (userAccounts == null)
+                {
+                    return NotFound();
+                }
+
+                return View(userAccounts);
             }
-            return View(userAccounts);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: UserAccounts/Edit/5
@@ -144,19 +188,26 @@ namespace NetPress.Controllers
         // GET: UserAccounts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var userAccounts = await userAccountContext.UserAccounts
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (userAccounts == null)
+            string sessionRole = HttpContext.Session.GetString("NetPressRole");
+            if (ValidUser(sessionRole))
             {
-                return NotFound();
-            }
 
-            return View(userAccounts);
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var userAccounts = await userAccountContext.UserAccounts
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (userAccounts == null)
+                {
+                    return NotFound();
+                }
+
+                return View(userAccounts);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: UserAccounts/Delete/5
@@ -197,6 +248,8 @@ namespace NetPress.Controllers
                 {
                     //HttpContext.Session.SetString("NemesysUserId", user.Id.ToString());
                     HttpContext.Session.SetString("NetPressUsername", user.UserName);
+
+                    HttpContext.Session.SetString("NetPressRole", user.RolesType.ToString());
                     return RedirectToAction("Details",new { user.Id });
 
                 }
@@ -214,6 +267,29 @@ namespace NetPress.Controllers
                 return View();
             }
 
+
+        }
+
+        public bool ValidUser(string sessionRole)
+        {
+            if (sessionRole != null)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+        public bool UserAdmin(string sessionRole)
+        {
+            if (sessionRole != null)
+            {
+                if (sessionRole.Equals("Admin"))
+                {
+                    return true;
+                }
+            }
+            return false;
 
         }
     }
