@@ -5,7 +5,6 @@ C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\bin\Debug\netcoreapp2.2\NetPres
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\bin\Debug\netcoreapp2.2\NetPress.pdb
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\bin\Debug\netcoreapp2.2\NetPress.Views.dll
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\bin\Debug\netcoreapp2.2\NetPress.Views.pdb
-C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\NetPress.csprojAssemblyReference.cache
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\NetPress.csproj.CoreCompileInputs.cache
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\NetPress.RazorAssemblyInfo.cache
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\NetPress.RazorAssemblyInfo.cs
@@ -35,3 +34,4 @@ C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\V
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Index.g.cshtml.cs
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Login.g.cshtml.cs
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LoginPartial.g.cshtml.cs
+C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\NetPress.csprojAssemblyReference.cache

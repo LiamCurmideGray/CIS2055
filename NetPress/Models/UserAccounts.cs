@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetPress.Models
 {
@@ -22,9 +22,8 @@ namespace NetPress.Models
         [Required(ErrorMessage = "Password is required")]
         public string UserPassword { get; set; }
 
-        public string RolesType {get; set;}
-
-        
+        public int RoleId { get; set; }
         public Roles Role { get; set; }
+        
     }
 }
