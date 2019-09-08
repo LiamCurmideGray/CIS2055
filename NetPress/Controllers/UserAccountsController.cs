@@ -27,10 +27,10 @@ namespace NetPress.Controllers
 
         // GET: UserAccounts
         public async Task<IActionResult> Index()
-        {
-            string sessionRole = HttpContext.Session.GetString("NetPressRole");
+        { 
+            
 
-            if (UserAdmin(sessionRole))
+            if (UserAdmin())
             {
                     ViewData["SessionData"] = HttpContext.Session.GetString("NetPressUsername");
                     return View(await userAccountContext.UserAccounts.ToListAsync());
@@ -45,9 +45,8 @@ namespace NetPress.Controllers
         
         public async Task<IActionResult> Details(int? id)
         {
-            string sessionRole = HttpContext.Session.GetString("NetPressRole");
 
-            if (ValidUser(sessionRole))
+            if (ValidUser())
             {
                     if (id == null)
                     {
@@ -99,7 +98,7 @@ namespace NetPress.Controllers
                          .FirstOrDefaultAsync(thisRole => thisRole.Id == 2);
 
                         userAccounts.Role = role;
-                        userAccounts.RolesType = "Publisher";
+                       
 
                         userAccountContext.Update(userAccounts);
                         await userAccountContext.SaveChangesAsync();
@@ -130,8 +129,8 @@ namespace NetPress.Controllers
         // GET: UserAccounts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            string sessionRole = HttpContext.Session.GetString("NetPressRole");
-            if (ValidUser(sessionRole))
+            
+            if (ValidUser())
             {
 
                 if (id == null)
@@ -189,8 +188,8 @@ namespace NetPress.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
 
-            string sessionRole = HttpContext.Session.GetString("NetPressRole");
-            if (ValidUser(sessionRole))
+           
+            if (ValidUser())
             {
 
                 if (id == null)
@@ -242,14 +241,15 @@ namespace NetPress.Controllers
 
             if (user != null)
             {
-               // string checkPassword = HashSHA512String(Password, user.UserId.ToString());
 
                 if (user.UserPassword.Equals(Password))
                 {
-                    //HttpContext.Session.SetString("NemesysUserId", user.Id.ToString());
+                   
                     HttpContext.Session.SetString("NetPressUsername", user.UserName);
 
-                    HttpContext.Session.SetString("NetPressRole", user.RolesType.ToString());
+                    Roles role = userAccountContext.Roles.FirstOrDefault(roleContext => roleContext.Id == user.RoleId);
+                    
+                    HttpContext.Session.SetString("NetPressRole", role.RoleType);
                     return RedirectToAction("Details",new { user.Id });
 
                 }
@@ -270,8 +270,9 @@ namespace NetPress.Controllers
 
         }
 
-        public bool ValidUser(string sessionRole)
+        public bool ValidUser()
         {
+            string sessionRole = HttpContext.Session.GetString("NetPressRole");
             if (sessionRole != null)
             {
                 return true;
@@ -280,8 +281,9 @@ namespace NetPress.Controllers
 
         }
 
-        public bool UserAdmin(string sessionRole)
+        public bool UserAdmin()
         {
+            string sessionRole = HttpContext.Session.GetString("NetPressRole");
             if (sessionRole != null)
             {
                 if (sessionRole.Equals("Admin"))
