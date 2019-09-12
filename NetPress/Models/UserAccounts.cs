@@ -22,8 +22,10 @@ namespace NetPress.Models
         [Required(ErrorMessage = "Password is required")]
         public string UserPassword { get; set; }
 
-        public int RoleId { get; set; }
+        [ForeignKey("RoleId")]
         public Roles Role { get; set; }
+        public int RoleId { get; set; }
+        
         
     }
 }

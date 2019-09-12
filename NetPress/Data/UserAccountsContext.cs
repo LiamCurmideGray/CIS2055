@@ -19,6 +19,7 @@ namespace NetPress.Models
 
         public DbSet<ArticleCategories> Categories { get; set; }
 
+        public DbSet<Articles> Articles { get; set; }
 
     }
 }
