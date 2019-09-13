@@ -13,8 +13,6 @@ C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\NetPres
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\NetPress.TagHelpers.input.cache
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\NetPress.TagHelpers.output.cache
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\NetPress.RazorCoreGenerate.cache
-C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
-C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 C:\Users\liamc\Documents\GitHub\CIS2055\NetPress\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs

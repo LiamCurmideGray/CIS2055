@@ -24,9 +24,14 @@ namespace NetPress.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["SessionData"] = HttpContext.Session.GetString("NetPressUsername");
-            UserAccounts user = await _context.UserAccounts.FirstOrDefaultAsync(usercontext => usercontext.UserName == HttpContext.Session.GetString("NetPressUsername"));
+            UserAccounts user = await _context.UserAccounts.FirstOrDefaultAsync(usercontext =>
+            usercontext.UserName == HttpContext.Session.GetString("NetPressUsername"));
 
-            ViewData["AuthorId"] = user.Id;
+                if(ViewData["SessionData"] != null)
+            {
+                ViewData["AuthorId"] = user.Id;
+                
+            }          
 
             return View(await _context.Articles.ToListAsync());
         }
