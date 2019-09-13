@@ -4,7 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<center>
+    <h1>
+        NetPress
+    </h1>
+</center>
+<br />
 
 @if (ViewData["SessionData"] != null)
 {
@@ -18,48 +23,49 @@
     {
         @if (item.Status == "Publish")
         {
-    <h2>
-       @Html.DisplayFor(modelItem => item.Title)
-    </h2>
-           
-    <table class="table">
+            <h2>
+                @Html.DisplayFor(modelItem => item.Title)
+            </h2>
 
-       
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-
-        </tr>
-        <tr>
-            <td>
-                Last Modified: @Html.DisplayFor(modelItem => item.LastModified)
-            </td>
-
-        </tr>
-        <tr>
+            <table class="table">
 
 
-            @if (ViewData["SessionData"] != null)
-            {
-                if (ViewData["AuthorId"].ToString() == item.AuthorId.ToString())
-                {
+                <tr>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        @Html.DisplayFor(modelItem => item.Content)
                     </td>
-                }
-            }
-        </tr>
-    </table>
-           
-               
-                <br />
 
-                
+                </tr>
+                <tr>
+                   
+                    <td>
+                        Last Modified: @Html.DisplayFor(modelItem => item.LastModified)
+                    </td>
 
-          
+                </tr>
+                <tr>
+
+
+                    @if (ViewData["SessionData"] != null)
+                    {
+                        if (ViewData["AuthorId"].ToString() == item.AuthorId.ToString())
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        }
+                    }
+                </tr>
+            </table>
+
+
+            <br />
+
+
+
+
 
         }
     }

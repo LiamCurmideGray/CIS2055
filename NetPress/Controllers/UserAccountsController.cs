@@ -36,7 +36,7 @@ namespace NetPress.Controllers
                     return View(await userAccountContext.UserAccounts.ToListAsync());
                                
             }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Articles");
            
         }
 
@@ -65,7 +65,7 @@ namespace NetPress.Controllers
                 
 
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Articles");
 
            
         }
@@ -146,7 +146,7 @@ namespace NetPress.Controllers
 
                 return View(userAccounts);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Articles");
         }
 
         // POST: UserAccounts/Edit/5
@@ -206,7 +206,7 @@ namespace NetPress.Controllers
 
                 return View(userAccounts);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Articles");
         }
 
         // POST: UserAccounts/Delete/5
